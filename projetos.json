@@ -36,9 +36,9 @@
             "logo": "images/datavalid-antigo-basico.png",
             "style": "width: 161px;",
             "endpointMock": "https://apigateway.serpro.gov.br/datavalid-trial/basico/vbeta1",
-            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacaoPlanoBasico.json",
+            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacao/degustacaoPlanoBasico.json",
             "endpointProducao": "https://apigateway.serpro.gov.br/datavalid/basico/vbeta1",
-            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producaoPlanoBasico.json"
+            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producao/producaoPlanoBasico.json"
         },
         {
             "api": "datavalid",
@@ -46,9 +46,9 @@
             "logo": "images/datavalid-antigo-biometria.png",
             "style": "width: 161px;",
             "endpointMock": "https://apigateway.serpro.gov.br/datavalid-trial/basico/vbeta1",
-            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacaoPlanoBiometria.json",
+            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacao/degustacaoPlanoBiometria.json",
             "endpointProducao": "https://apigateway.serpro.gov.br/datavalid/biometria/vbeta1",
-            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producaoPlanoBiometria.json"
+            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producao/producaoPlanoBiometria.json"
         },
         {
             "api": "datavalid",
@@ -56,9 +56,9 @@
             "logo": "images/datavalid-plan-novo.png",
             "style": "width: 161px;",
             "endpointMock": "https://apigateway.serpro.gov.br/datavalid-trial/biometria/vbeta1",
-            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacaoPlanoNovo.json",
+            "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/datavalid/degustacao/degustacaoPlanoNovo.json",
             "endpointProducao": "https://apigateway.serpro.gov.br/datavalid/biometria/vbeta1",
-            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producaoPlanoNovo.json"
+            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producao/producaoPlanoNovo.json"
         },
         {
             "api": "datavalid",
@@ -68,7 +68,7 @@
             "endpointMock": "https://apigateway.serpro.gov.br/datavalid-trial/biometria/vbeta1",
             "urlJsonSwaggerMock": "",
             "endpointProducao": "https://apigateway.serpro.gov.br/datavalid/biometria/vbeta1",
-            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producaoPlanoNovo-entidade.json"
+            "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/datavalid/producao/producaoPlanoNovo-entidade.json"
         },
          {
             "api": "viodec",
@@ -79,6 +79,9 @@
             "urlJsonSwaggerMock": "https://devserpro.github.io/apiserpro/apis/swaggers/vio/swagger-viodec-prod-",
             "endpointProducao": "https://apigateway.serpro.gov.br/viodec/v1/decode",
             "urlJsonSwaggerProducao": "https://devserpro.github.io/apiserpro/apis/swaggers/vio/swagger-viodec-prod-"
-        }
+        },
+
    ]
 }
+
+
