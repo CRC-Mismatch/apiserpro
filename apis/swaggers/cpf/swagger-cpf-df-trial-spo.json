@@ -124,7 +124,7 @@
             },
             "descricao": {
               "type": "string",
-              "description": "Ex: REGULAR"
+              "description":  "Ex: REGULAR"
             }
           }
         }
