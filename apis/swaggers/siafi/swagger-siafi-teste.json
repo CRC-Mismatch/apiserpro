@@ -21,7 +21,7 @@
   "swagger": "2.0",
   "info": {
     "version": "api",
-    "title": "Integração-SIAFI (api-siafi)",
+    "title": "Integração SIAFI (api-siafi)",
     "description": "Para informações de como se autenticar antes de consumir as API, por favor, consulte a documentação em: http://devserpro.github.io/apiserpro/ \n\n    \nO serviço `Integração SIAFI` é disponibilizado através do `HTTP REST` oferencendo operações de lançamento ao SIAFI.\n<br>\n## Horário de Funcionamento \n A API Consulta Dívida Ativa funciona das 09:00 às 22:00 hs. Fora deste horário a API retornará o código 403, indicando que a API está fora do horário de funcionamento. \n<br>\n## Códigos de  Retorno não Tarifados \n| Código de retorno | Resumido | Explicação | \n| ------------- | :-------------------- | :------------------------------------------------------------------------------- |\n| 403           | Api Indisponível    | Api fora do horário de funcionamento  |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 500 | Erro no Servidor | Ocorreu algum erro no servidor | \n<br>\n ## Campo cabeçalho da requisição (X-Request-Tag)\n\n  Este campo é opcional na utilização das chamadas às APIs / Datavalid e serve como identificador de requisições. Caso uma empresa necessite, por exemplo, agrupar a quantidade de requisições realizadas por cada departamento, poderá utilizar este campo de forma a identificar no faturamento a quantidade de requisições de cada item agrupador. \n<br><br>\n O campo é de texto livre (string até 32 caracteres) e não possui validação de seu conteúdo. Cabe, portanto, ao cliente manter o controle das informações que são enviadas para esse campo de forma que o relatório de faturamento faça o agrupamento adequado. \n<br><br>\nEste atributo pode ser usado pela entidade de classe e/ou grupo econômico na modalidade global com ônus entidade para fins de identificação do associado que realiza a requisição. No caso de entidades de classe ou grupos econômicos que realizem a contratação com ônus para o associado não é necessário realizar o agrupamento pois cada associado irá possuir sua própria chave de consumo. \n<br>\n ## Degustação \n ### Endereço base de Degustação \n    https://apigateway.serpro.gov.br/api-integra-siafi-trial/api \n<br>\n  ## Produção \n ### Endereço de Produção \n    https://apigateway.serpro.gov.br/api-integra-siafi-trial/api \n    "
   },
   "basePath": "/api-integra-siafi-trial/api",
@@ -1057,17 +1057,17 @@
       }
     },
     "/v2/nota-bloqueio/{ug}/{gestao}/{ano}/{numero}": {
-      "get": {
+      "get": {      
         "tags": [
           "Nota de Dotação"
         ],
         "summary": "Consulta uma Nota de Bloqueio de Crédito",
         "description": "Consulta uma Nota de Bloqueio de Crédito a partir dos parâmetros UG, Gestão, Ano e Número da ND\n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/api-integra-siafi-trial/api/v2/nota-bloqueio/010001/00001/2018/000005\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo) \n\n#### Retorno\n    {\n      \"dataEmissao\": \"14MAI18\",\n      \"numeroDocumento\": \"2018ND000005\",\n      \"ugEmitente\": \"010001\",\n      \"nomeUGEmitente\": \"CAMARA DOS DEPUTADOS 2018\",\n      \"gestaoEmitente\": \"00001\",\n      \"nomeGestaoEmitente\": \"TESOURO NACIONAL\",\n      \"taxaCambio\": \"\",\n      \"observacao\": \"TESTE\", \n      \"listaEventos\": [\n        {\n          \"evento\": \"200020\",\n          \"esferaOrcamentaria\": \"1\",\n          \"ptres\": \"001000\",\n          \"idoc\": \"9999\",\n          \"naturezaDespesa\": \"339000\",\n          \"fonte\": \"0100\", \n          \"valor\": \"20000\",  \n        }\n      ]             \n    }",
         "consumes": [
-          "application/json"
+          "application/json; charset=UTF-8"
         ],
         "produces": [
-          "application/json"
+          "application/json; charset=UTF-8"
         ],
         "parameters": [
           {
