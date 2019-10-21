@@ -520,7 +520,7 @@
     "/v2/nota-credito/{ug}/{gestao}/{ano}/{numero}": {
       "get": {
         "tags": [
-          'Nota de Crédito'
+          "Nota de Crédito"
         ],
         "summary": "Consulta Nota de Crédito",
         "description": "Consulta uma Nota de Crédito existente\n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/api-integra-siafi-deg/api/v2/nota-credito/010001/00001/2018/800001\n    \n    No header:\n      x-credencial: MTExMTExMTExMTEuMDEwMDAxLlNJQUZJMjAxOA==\n      (valor referente às credenciais 11111111111.010001.SIAFI2018 convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n      \n#### Retorno\n    {\n      \"dataEmissao\": \"14MAI18\",\n      \"numero\": \"2018NC\",\n      \"ugEmitente\": \"010001\",\n      \"gestaoEmitente\": \"00001\",\n      \"ugFavorecida\": \"10001\",\n      \"gestaoFavorecida\": \"00001\",\n      \"taxaCambio\": \"\",\n      \"numeroTransferencia\": \"\",\n      \"observacao\": \"TESTE\",\n      \"listaEventos\": [\n        {\n          \"evento\": \"300062\",\n          \"esferaOrcamentaria\": \"1\",\n          \"ptres\": \"1\",\n          \"fonteRecurso\": \"0100000000\",\n          \"naturezaDespesa\": \"339039\",\n          \"subitem\": \"\",\n          \"ugResponsavel\": \"010001\",\n          \"planoInterno\": \"\",\n          \"valor\": \"00000000000100000\"\n        }\n      ]\n    }",
