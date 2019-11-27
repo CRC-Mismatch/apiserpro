@@ -1,3 +1,4 @@
+
 {
   "host": "apigateway.serpro.gov.br",
   "security": [
@@ -263,7 +264,10 @@
             "description": "Retorna os dados de confirmação de inclusão de solicitação.",
             "schema": {
               "$ref": "#/definitions/confirmacaoSolicitacao"
-            }
+            } 
+          },
+          "412": {
+            "description": "Necessário cadastro de uma URL para receber notificações",
           },
           "500": {
             "description": "Erro interno do servidor"
@@ -308,7 +312,7 @@
             "schema": {
               "$ref": "#/definitions/consultarSolicitacoes"
             }
-          },          
+          },            
           "500": {
             "description": "Erro interno do servidor"
           }
