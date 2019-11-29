@@ -83,7 +83,7 @@
         }
       }
     },
-    "/push/clientes": {
+    "/v1/nfe/push/clientes": {
       "post": {
         "tags": [
           "Push NF-e"
@@ -220,7 +220,7 @@
         }
       }
     },
-    "/push/solicitacoes": {
+    "/v1/nfe/push/solicitacoes": {
       "post": {
         "tags": [
           "Push NF-e"
@@ -311,7 +311,7 @@
         }
       }
     },
-    "/push/solicitacoes/{solicitacaoId}": {
+    "/v1/nfe/push/solicitacoes/{solicitacaoId}": {
       "get": {
         "tags": [
           "Push NF-e"
