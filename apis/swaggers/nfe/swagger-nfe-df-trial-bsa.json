@@ -19,7 +19,7 @@
   "info": {
     "version": "1.0",
     "title": "API NF-e",
-    "description": "Para informações de como se autenticar antes de consumir a API, por favor, consulte a documentação em: http://devserpro.github.io/apiserpro/ \n\nOs serviços `Consulta Nota Fiscal Eletrônica` e `Push NFe` são disponibilizados através do `HTTP REST`. Oferencendo operações para consulta de notas fiscais eletrônicas e também enviando notificações de atualizações de determinadas notas, através de sua chave de acesso. \n<br>\n ## Serviço push NF-e \n\n O cliente recebe uma notificação, informando que determinada NF-e já incluída em um solicitação de monitoração teve atualização. \n\n  Método post de notificação: \n\n  {  \n   \"chaveNFe\": \"CHAVE_NFE\", \n  \"dataHoraEnvio\": \"DATA_HORA\"  \n   }  \n\n O cliente deve implementar em sua aplicação o tratamento deste método Post. \n<br>\n ## Códigos de retorno não tarifados da consulta NF-e\n|  Código de retorno |  Resumido |  Explicação |\n| ------------- |:--------------------|:----------------------------------------------------------------------------- |\n| &nbsp;           | &nbsp;    | &nbsp;  | \n |400           | Requisição inválida    | O número da chave informado não é válido.       |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 404           | Not found    | O número da chave informado não foi encontrado.  |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 406           | Not Acceptable    | O formato do arquivo de saída deve ser Json/Xml. |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 500           | Erro no Servidor | Ocorreu algum erro no servidor.      |\n<br>\n ## Leiautes e formatos \n\n<br>As informações da NF-e disponibilizadas estão de acordo com o leiaute da NF-e, disponibilizado pelo Encontro Nacional de Coordenadores e Administradores Tributários Estaduais (ENCAT). \n<br><br>\n As Notas Técnicas com as informações de leiaute da NF-e estão disponíveis para *download* em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=tW+YMyk/50s= \n<br><br>\n A estrutura do JSON de retorno seguem as mesmas especificações dos esquemas XML dos Web Services, disponibilizados em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/fwLvLUSmU8= \n<br><br>\n Os campos do `TIPO NUMÉRICO`, o JSON de retorno irá devolver no `formato number`. E caso o valor numérico do campo seja um valor muito grande, o retorno poderá aparecer no json no `formato de notação científica`. Cabe a aplicação que consome o serviço da API dar o tratamento adequado para campos numéricos. \n<br>\n## Solicitando assinatura com carimbo de tempo\n\n  Caso deseje que sua solicitação venha com uma assinatura de Carimbo de Tempo, basta incluir, no cabeçalho de sua requisição, a informação `x-signature: 1`.\n  \n  A assinatura será retornada no cabeçalho da resposta, com o nome `stamp`.\n<br>\n## Verificando assinatura com carimbo de tempo\n\n  Para verificar assinatura de carimbo de tempo, siga as instruções da documentação abaixo:\n  \n[Documentação - Verificação Carimbo de Tempo](https://devserpro.github.io/apiserpro/apis/swagger-ui-master/dist/index.html?bearer=4e1a1858bdd584fdc077fb7d80f39283&url=https://devserpro.github.io/apiserpro/apis/swaggers/carimbo-tempo/swagger-timestampcheck-trial-bsa.json#!/default/post_check)\n<br>\n## Campo cabeçalho da requisição (X-Request-Tag)\n\n  Este campo é opcional na utilização das chamadas às APIs / Datavalid e serve como identificador de requisições. Caso uma empresa necessite, por exemplo, agrupar a quantidade de requisições realizadas por cada departamento, poderá utilizar este campo de forma a identificar no faturamento a quantidade de requisições de cada item agrupador. \n<br><br>\n O campo é de texto livre (string até 32 caracteres) e não possui validação de seu conteúdo. Cabe, portanto, ao cliente manter o controle das informações que são enviadas para esse campo de forma que o relatório de faturamento faça o agrupamento adequado. \n<br><br>\n Este atributo pode ser usado pela entidade de classe e/ou grupo econômico na modalidade global com ônus entidade para fins de identificação do associado que realiza a requisição. No caso de entidades de classe ou grupos econômicos que realizem a contratação com ônus para o associado não é necessário realizar o agrupamento pois cada associado irá possuir sua própria chave de consumo.\n<br>\n## Endereço base de produção \n https://apigateway.serpro.gov.br/consulta-nfe-df/api/v1/nfe \n<br>\n ## Endereço base de degustação \n https://apigateway.serpro.gov.br/consulta-nfe-df-trial/api/v1/nfe \n<br>\n## Exemplo de chamada e retorno\n### Chamada\n    https://apigateway.serpro.gov.br/consulta-nfe-df-trial/api/v1/nfe/35161147508411011603551000077959551093041003 \n<br>\n ### Retorno \n\n   O retorno será do tipo `arquivo.json` ou `arquivo.xml`"
+    "description": "Para informações de como se autenticar antes de consumir a API, por favor, consulte a documentação em: http://devserpro.github.io/apiserpro/ \n\nOs serviços `Consulta Nota Fiscal Eletrônica` e `Push NFe` são disponibilizados através do `HTTP REST`. Oferencendo operações para consulta de notas fiscais eletrônicas e também enviando notificações de atualizações de determinadas notas, através de sua chave de acesso. \n<br>\n ## Serviço push NF-e \n\n O cliente recebe uma notificação, informando que determinada NF-e já incluída em um solicitação de monitoração teve atualização. \n\n  Método post de notificação: \n\n  {  \n   \"chaveNFe\": \"CHAVE_NFE\", \n  \"dataHoraEnvio\": \"DATA_HORA\"  \n   }  \n\n O cliente deve implementar em sua aplicação o tratamento deste método Post. \n<br>\n ## Códigos de retorno não tarifados da consulta NF-e\n|  Código de retorno |  Resumido |  Explicação |\n| ------------- |:--------------------|:----------------------------------------------------------------------------- |\n| &nbsp;           | &nbsp;    | &nbsp;  | \n |400           | Requisição inválida    | O número da chave informado não é válido.       |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 404           | Not found    | O número da chave informado não foi encontrado.  |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 406           | Not Acceptable    | O formato do arquivo de saída deve ser Json/Xml. |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 500           | Erro no Servidor | Ocorreu algum erro no servidor.      |\n<br>\n ## Leiautes e formatos \n\n<br>As informações da NF-e disponibilizadas estão de acordo com o leiaute da NF-e, disponibilizado pelo Encontro Nacional de Coordenadores e Administradores Tributários Estaduais (ENCAT). \n<br><br>\n As Notas Técnicas com as informações de leiaute da NF-e estão disponíveis para *download* em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=tW+YMyk/50s= \n<br><br>\n A estrutura do JSON de retorno seguem as mesmas especificações dos esquemas XML dos Web Services, disponibilizados em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/fwLvLUSmU8= \n<br><br>\n Os campos do `TIPO NUMÉRICO`, o JSON de retorno irá devolver no `formato number`. E caso o valor numérico do campo seja um valor muito grande, o retorno poderá aparecer no json no `formato de notação científica`. Cabe a aplicação que consome o serviço da API dar o tratamento adequado para campos numéricos. \n<br>\n## Solicitando assinatura com carimbo de tempo\n\n  Caso deseje que sua solicitação venha com uma assinatura de Carimbo de Tempo, basta incluir, no cabeçalho de sua requisição, a informação `x-signature: 1`.\n  \n  A assinatura será retornada no cabeçalho da resposta, com o nome `stamp`.\n<br>\n## Verificando assinatura com carimbo de tempo\n\n  Para verificar assinatura de carimbo de tempo, siga as instruções da documentação abaixo:\n  \n[Documentação - Verificação Carimbo de Tempo](https://devserpro.github.io/apiserpro/apis/swagger-ui-master/dist/index.html?bearer=4e1a1858bdd584fdc077fb7d80f39283&url=https://devserpro.github.io/apiserpro/apis/swaggers/carimbo-tempo/swagger-timestampcheck-trial-bsa.json#!/default/post_check)\n<br>\n## Campo cabeçalho da requisição (X-Request-Tag)\n\n  Este campo é opcional na utilização das chamadas às APIs / Datavalid e serve como identificador de requisições. Caso uma empresa necessite, por exemplo, agrupar a quantidade de requisições realizadas por cada departamento, poderá utilizar este campo de forma a identificar no faturamento a quantidade de requisições de cada item agrupador. \n<br><br>\n O campo é de texto livre (string até 32 caracteres) e não possui validação de seu conteúdo. Cabe, portanto, ao cliente manter o controle das informações que são enviadas para esse campo de forma que o relatório de faturamento faça o agrupamento adequado. \n<br><br>\n Este atributo pode ser usado pela entidade de classe e/ou grupo econômico na modalidade global com ônus entidade para fins de identificação do associado que realiza a requisição. No caso de entidades de classe ou grupos econômicos que realizem a contratação com ônus para o associado não é necessário realizar o agrupamento pois cada associado irá possuir sua própria chave de consumo.\n<br>\n## Endereço base de produção \n https://apigateway.serpro.gov.br/nfe/1 \n<br>\n ## Endereço base de degustação \n https://apigateway.serpro.gov.br/nfe-trial/1 \n<br>\n## Exemplo de chamada e retorno da Consulta NF-e\n### Chamada\n    https://apigateway.serpro.gov.br/nfe-trial/1/35161147508411011603551000077959551093041003 \n<br>\n ### Retorno \n\n   O retorno será do tipo `arquivo.json` ou `arquivo.xml`"
   },
   "basePath": "/consulta-nfe-df-trial/api",
   "paths": {
@@ -83,7 +83,7 @@
         }
       }
     },
-    "/v1/nfe/push/clientes": {
+    "/push/clientes": {
       "post": {
         "tags": [
           "Push NF-e"
@@ -91,7 +91,7 @@
         "summary": "Cadastrar informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração do usuário só serão aceitas se terminarem com .br ou .com. Veja os exemplos:                                              https://cliente.com                                                                   https://cliente.com.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://cliente.com\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
+        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
         "consumes": [
           "application/json"
         ],
@@ -103,7 +103,7 @@
             "description": "Dados do cliente",
             "name": "body",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/cadastrarCliente"
             }
@@ -127,9 +127,12 @@
             "schema": {
               "$ref": "#/definitions/confirmacaoCadastramentoCliente"
             }
+          },          
+          "400": {
+            "description": "Valor de 'urlNotificacao' inválido."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Erro interno do servidor."
           }
         }
       },
@@ -140,7 +143,7 @@
         "summary": "Atualizar informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://cliente.com\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
+        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
         "consumes": [
           "application/json"
         ],
@@ -152,7 +155,7 @@
             "description": "Dados do cliente",
             "name": "body",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/atualizarCliente"
             }
@@ -173,9 +176,12 @@
         "responses": {
           "200": {
             "description": "Dados alterados com sucesso."
+          },          
+          "400": {
+            "description": "Valor de 'urlNotificacao' inválido."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Erro interno do servidor."
           }
         }
       },
@@ -186,7 +192,7 @@
         "summary": "Consulta informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Conteúdo de entrada\n    { \n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\" \n    } \n\n  #### Retorno \n    { \n      \"id\": \"000000000000000\", \n      \"urlNotificacao\": \"http://cliente.com\", \n      \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n      \"dataAtualizacao\": \"2019-11-20T16:20:11.851Z\" \n    } ",
+        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Conteúdo de entrada\n    { \n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\" \n    } \n\n  #### Retorno \n    { \n      \"id\": \"000000000000000\", \n      \"urlNotificacao\": \"http://url_cliente.com.br\", \n      \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n      \"dataAtualizacao\": \"2019-11-20T16:20:11.851Z\" \n    } ",
         "consumes": [
           "application/json"
         ],
@@ -220,7 +226,7 @@
         }
       }
     },
-    "/v1/nfe/push/solicitacoes": {
+    "/push/solicitacoes": {
       "post": {
         "tags": [
           "Push NF-e"
@@ -277,7 +283,7 @@
         "summary": "Consulta todas as solicitações de monitoração de um cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes \n    No header: \n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN \n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo) \n #### Conteúdo de entrada \n    {\n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes\" \n    } \n  #### \n  #### Retorno \n    [ \n      { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://example.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:01.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:02.213Z\" \n            } \n         ] \n      }, \n      { \n        \"solicitacaoId\": \"dbo5wvBsVy52kpY\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://example.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008292\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:03.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008293\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:04.213Z\" \n            } \n         ] \n      } \n       \n    ] ",
+        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes \n    No header: \n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN \n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo) \n #### Conteúdo de entrada \n    {\n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes\" \n    } \n  #### \n  #### Retorno \n    [ \n      { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:01.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:02.213Z\" \n            } \n         ] \n      }, \n      { \n        \"solicitacaoId\": \"dbo5wvBsVy52kpY\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://example.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008292\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:03.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008293\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:04.213Z\" \n            } \n         ] \n      } \n       \n    ] ",
         "consumes": [
           "application/json"
         ],
@@ -311,7 +317,7 @@
         }
       }
     },
-    "/v1/nfe/push/solicitacoes/{solicitacaoId}": {
+    "/push/solicitacoes/{solicitacaoId}": {
       "get": {
         "tags": [
           "Push NF-e"
@@ -319,7 +325,7 @@
         "summary": "Consulta uma solicitação específica de monitoração de um cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  al2sDBn6KNVpleB <br><br><br>\n  #### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes/{solicitacaoId}\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo) \n  #### Retorno\n    { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://example.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.213Z\" \n            } \n         ] \n    } \n \n",
+        "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  al2sDBn6KNVpleB <br><br><br>\n  #### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes/{solicitacaoId}\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo) \n  #### Retorno\n    { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.213Z\" \n            } \n         ] \n    } \n \n",
         "consumes": [
           "application/json"
         ],
