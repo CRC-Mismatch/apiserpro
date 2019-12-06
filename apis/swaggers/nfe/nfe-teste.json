@@ -103,7 +103,7 @@
             "description": "Dados do cliente",
             "name": "body",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/cadastrarCliente"
             }
@@ -155,7 +155,7 @@
             "description": "Dados do cliente",
             "name": "body",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/atualizarCliente"
             }
