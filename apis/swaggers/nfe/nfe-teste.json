@@ -91,7 +91,7 @@
         "summary": "Cadastrar informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://cliente.com                                                                   https://cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
+        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://cliente.com                                                                   https://cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
         "consumes": [
           "application/json"
         ],
@@ -129,10 +129,10 @@
             }
           },          
           "400": {
-            "description": "Requisição inválida"
+            "description": "Valor de 'urlNotificacao' inválido."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Erro interno do servidor."
           }
         }
       },
@@ -143,7 +143,7 @@
         "summary": "Atualizar informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://cliente.com                                                                   https://cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
+        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://cliente.com                                                                   https://cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
         "consumes": [
           "application/json"
         ],
@@ -178,10 +178,10 @@
             "description": "Dados alterados com sucesso."
           },          
           "400": {
-            "description": "Requisição inválida"
+            "description": "Valor de 'urlNotificacao' inválido."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Erro interno do servidor."
           }
         }
       },
@@ -192,7 +192,7 @@
         "summary": "Consulta informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Conteúdo de entrada\n    { \n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\" \n    } \n\n  #### Retorno \n    { \n      \"id\": \"000000000000000\", \n      \"urlNotificacao\": \"http://cliente.com\", \n      \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n      \"dataAtualizacao\": \"2019-11-20T16:20:11.851Z\" \n    } ",
+        "description": " ## Exemplo\n#### Chamada\n\n    https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n\n#### Conteúdo de entrada\n    { \n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/clientes\" \n    } \n\n  #### Retorno \n    { \n      \"id\": \"000000000000000\", \n      \"urlNotificacao\": \"http://url_cliente.com.br\", \n      \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n      \"dataAtualizacao\": \"2019-11-20T16:20:11.851Z\" \n    } ",
         "consumes": [
           "application/json"
         ],
