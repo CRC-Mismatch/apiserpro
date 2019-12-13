@@ -322,7 +322,7 @@
         "tags": [
           "Push NF-e"
         ],
-        "summary": "Consulta uma solicitação específica de monitoração de um cliente",
+        "summary": "Consulta uma solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  al2sDBn6KNVpleB <br><br><br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/solicitacoes/{solicitacaoId}\n    \n     \n  #### Retorno\n    { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.213Z\" \n            } \n         ] \n    } \n \n",
@@ -372,7 +372,7 @@
         "tags": [
           "Push NF-e"
         ],
-        "summary": "Excluir uma determinada solicitação de monitoração",
+        "summary": "Excluir uma solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;al2sDBn6KNVpleB \n<br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/solicitacoes/{solicitacaoId} \n\n#### Retorno\n    { \n        \"mensagem\": \"Solicitação excluída com sucesso.\"\n    } \n",
@@ -494,12 +494,20 @@
       }
     },
     "incluirSolicitacao": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "example": "chave,chave"
+      "type": "object",
+      "properties": {
+        "chavesMonitoracao": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "chave": {
+                "type": "string"
+              }
+            }
+          }
+        }
       }
-    }, 
+    },
     "confirmacaoSolicitacao": {
       "type": "object",
       "properties": {
@@ -1264,5 +1272,4 @@
       }
     }
   }
-  
 }
