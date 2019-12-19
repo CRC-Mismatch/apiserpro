@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "API Consulta NF-e (modalidade Direto na Faixa)",
-    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferencendo operações para consulta de notas fiscais eletrônicas e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use a chave `Bearer asdsadsadsadsa`<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br)",
+    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferencendo operações para consulta de notas fiscais eletrônicas, e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use a chave `Bearer asdsadsadsadsa` e as chaves da [Lista de Chaves para teste](https://cliente.serpro.gov.br)<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br) <br/><br/>",
     "version": "api"
   },
   "externalDocs": {
@@ -52,33 +52,45 @@
             "content": {
               "application/xml": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/NFe"
-                  }
+                  "$ref": "#/components/schemas/NFe"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/NFe"
-                  }
+                  "$ref": "#/components/schemas/NFe"
                 }
               }
             }
           },
           "400": {
             "description": "Chave Inválida",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChaveInvalida"
+                }
+              }
+            }
           },
           "404": {
             "description": "Chave não encontrada",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChaveNaoEncontrada"
+                }
+              }
+            }
           },
           "406": {
-            "description": "O formato dos dados requisitados é inválido. Utilizar apenas JSON ou XML",
-            "content": {}
+            "description": "O formato dos dados requisitados é inválido. Utilizar `application/json` ou `application/xml`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormatoInvalido"
+                }
+              }
+            }
           },
           "500": {
             "description": "Erro interno da API",
@@ -86,10 +98,148 @@
           }
         }
       }
+    },
+    "/v1/nfe/push/clientes": {
+      "post": {
+        "tags": [
+          "pushnfe"
+        ],
+        "summary": "Cadastra a URL do cliente para o qual a notificação será enviada",
+        "requestBody": {
+          "description": "No momento, estamos apenas aceitando serviços REST, devidamente hospedados em servidores com URL terminadas em **.com** ou **.br**",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteCadastro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "URL do cliente cadastrada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteCadastroConfirmado"
+                }
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "notificacao": {
+            "{$request.body/urlNotificacao}": {
+              "post": {
+                "description": "Chamada enviada à URL do cliente, informando que uma das NF-e monitorada sofreu alteração",
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/NotificacaoNFe"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "200": {
+                    "description": "A notificação foi recebida com sucesso pelo cliente"
+                  },
+                  "500": {
+                    "description": "Algum erro ocorreu no envio da notificação"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "NotificacaoNFe": {
+        "type": "object",
+        "properties": {
+          "chaveNfe": {
+            "type": "string",
+            "description": "A chave da NF-e que foi atualizada",
+            "example": "12345678901234567890123456789012345678901234"
+          },
+          "dataHoraEnvio": {
+            "type": "string",
+            "description": "Data e Hora da atualização da NF-e",
+            "example": "2019-12-01T00:00:00.000Z"
+          }
+        }
+      },
+      "ClienteCadastroConfirmado": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CNPJ do cliente que cadastrou a URL",
+            "example": "33683111000107"
+          },
+          "urlNotificacao": {
+            "type": "string",
+            "description": "Endereço para o qual a notificação será enviada, via requisição REST",
+            "example": "http://meuservico.cliente.com.br/notificacao"
+          },
+          "dataCriacao": {
+            "type": "string",
+            "description": "Data/hora da gravação da solicitação",
+            "example": "2019-12-01T00:00:00.000Z"
+          }
+        }
+      },
+      "ClienteCadastro": {
+        "type": "object",
+        "properties": {
+          "urlNotificacao": {
+            "type": "string",
+            "description": "Endereço para o qual a notificação será enviada, via requisição REST",
+            "example": "http://meuservico.cliente.com.br/notificacao"
+          }
+        }
+      },
+      "ChaveInvalida": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Chave Inválida: 12345678901234567890123456789012345678901234"
+            }
+          }
+        }
+      },
+      "ChaveNaoEncontrada": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "HTTP 404 Not Found"
+            }
+          }
+        }
+      },
+      "FormatoInvalido": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "RESTEASY003635: No match for accept header"
+            }
+          }
+        }
+      },
       "NFe": {
         "type": "object",
         "properties": {
