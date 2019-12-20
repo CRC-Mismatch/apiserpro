@@ -88,7 +88,7 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Cadastrar informações do cliente",
+        "summary": "Cadastra informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes\n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
@@ -140,7 +140,7 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Atualizar informações do cliente",
+        "summary": "Atualiza informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes \n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
@@ -231,7 +231,7 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Incluir solicitação de monitoração",
+        "summary": "Inclui solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes \n\n    O cliente pode incluir a partir de uma solicitação várias Notas Fiscais Eletrônicas para serem monitoradas. \n\n      \n#### Conteúdo de entrada\n    { \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\",\n         \"43190788910252000603550010000375791937008291\"\n      ]    \n    } \n  ####  Retorno\n    { \n      \"solicitacaoId\": \"lOYKqr7HfhcDuJA\", \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\", \n         \"43190788910252000603550010000375791937008291\"\n      ], \n      \"dataCriacao\": \"2019-11-20T15:57:39.917Z\", \n      \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n      \"clienteId\": \"00000000000000\" \n    } ",
@@ -372,7 +372,7 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Excluir uma solicitação de monitoração",
+        "summary": "Exclui uma solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;al2sDBn6KNVpleB \n<br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes/{solicitacaoId} \n\n#### Retorno\n    { \n        \"mensagem\": \"Solicitação excluída com sucesso.\"\n    } \n",
