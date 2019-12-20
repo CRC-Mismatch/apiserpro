@@ -26,9 +26,9 @@
     "/{chave}": {
       "get": {
         "tags": [
-          "Consulta NF-e"
+          "Consulta NFe"
         ],
-        "summary": "Consulta Nota Fiscal Eletrônica",
+        "summary": "Consulta nota fiscal eletrônica",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": "Retorna as informações da NF-e com a chave de acesso informada. \n### Notas Fiscais Eletrônicas disponíveis para Degustação\n| Chave | Observação |\n| ---------------------- | ----------|\n| 35170608530528000184550000000154301000771561 | |\n| 35161147508411011603551000077959551093041003 | |\n| 53131205035672000156550010000004991543410167 | |\n| 42140612687276000179550010001505671172228752 | |\n| 35140903608306000202555000001100251571436929 | |\n| 53150337992500000167550010000029521000029516 | |\n| 31150917591579000107550010000014321081035918 | |\n| 35151200991908000104550020000063951000184833 | |\n| 31160906347409006953550110008369841081956475 | |\n| 31170309339936000973550250002397736362483965 | |\n| 35160900623904000335550010028792431858713854 | |\n| 35170300776574000156550020009091941178378523 | |\n| 53160911510448000171550010000106771000187760 | |\n| 52160819015622000111550010000007051300828370 | |\n| 53160621182711000102550010000012921000042921 | |\n| 52160609303953000101550010000008711000045330 | |\n| 53151205642646000196550010000287891000219878 | |\n| 53160713453539000148550010000009101000070190 | |\n| 52151013766790000162550010000028401250000010 | |\n| 53160705642646000196550010000298141000284189 | |\n| 52160400945852000151550010000041771020601080 | |\n| 24190201243220000109550010000007251000007252 | |\n| 24190420412822000197550010000004701000001816 | |\n| 25190400785860000188550010000000061000000868 | |\n| 29190332994770000193550020000000107000000124 | |\n| 33190403282458000179550010001434641841176079 | |\n| 87878774456468954646464654654546545446579312 | Essa NFe possui todos os array |\n|",
@@ -88,7 +88,7 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Cadastrar informações do cliente",
+        "summary": "Cadastra informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/clientes \n\n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
@@ -140,7 +140,7 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Atualizar informações do cliente",
+        "summary": "Atualiza informações do cliente",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/clientes \n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
@@ -231,7 +231,7 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Incluir solicitação de monitoração",
+        "summary": "Inclui solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/solicitacoes \n\n    O cliente pode incluir a partir de uma solicitação várias Notas Fiscais Eletrônicas para serem monitoradas. \n\n      \n#### Conteúdo de entrada\n    { \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\",\n         \"43190788910252000603550010000375791937008291\"\n      ]    \n    } \n  ####  Retorno\n    { \n      \"solicitacaoId\": \"lOYKqr7HfhcDuJA\", \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\", \n         \"43190788910252000603550010000375791937008291\"\n      ], \n      \"dataCriacao\": \"2019-11-20T15:57:39.917Z\", \n      \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n      \"clienteId\": \"00000000000000\" \n    } ",
@@ -372,7 +372,7 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Excluir uma solicitação de monitoração",
+        "summary": "Exclui uma solicitação de monitoração",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
         "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;al2sDBn6KNVpleB \n<br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe-trial/1/push/solicitacoes/{solicitacaoId} \n\n#### Retorno\n    { \n        \"mensagem\": \"Solicitação excluída com sucesso.\"\n    } \n",
