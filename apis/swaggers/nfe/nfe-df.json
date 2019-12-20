@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "API Consulta NF-e (modalidade Direto na Faixa)",
-    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferencendo operações para consulta de notas fiscais eletrônicas, e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use a chave `Bearer asdsadsadsadsa` e as chaves da [Lista de Chaves para teste](https://cliente.serpro.gov.br)<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br) <br/><br/>",
+    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferencendo operações para consulta de notas fiscais eletrônicas, e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use o token de acesso: `Bearer 4e1a1858bdd584fdc077fb7d80f39283` e as chaves da [Lista de Chaves para teste](https://cliente.serpro.gov.br)<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br) <br/><br/>",
     "version": "api"
   },
   "externalDocs": {
@@ -11,27 +11,33 @@
   },
   "servers": [
     {
-      "url": "https://apigateway.serpro.gov.br/consulta-nfe-df-trial"
+      "url": "https://apigateway.serpro.gov.br/consulta-nfe-df-trial",
+      "description": "Ambiente de testes"
     },
     {
-      "url": "https://apigateway.serpro.gov.br/consulta-nfe-df"
+      "url": "https://apigateway.serpro.gov.br/consulta-nfe-df",
+      "description": "Ambiente produtivo"
     }
   ],
   "tags": [
     {
-      "name": "nfe",
+      "name": "Consulta NF-e",
       "description": "Referente a consulta de NF-e através de sua chave de acesso"
     },
     {
-      "name": "pushnfe",
+      "name": "Notificação NF-e - Monitoração",
       "description": "Referente a notificação de atualização das NF-e monitoradas"
+    },
+    {
+      "name": "Notificação NF-e - Subscrição",
+      "description": "Referente ao cadastro do cliente para monitorar NF-e"
     }
   ],
   "paths": {
     "/v1/nfe/{chave}": {
       "get": {
         "tags": [
-          "nfe"
+          "Consulta NF-e"
         ],
         "summary": "Obtem informacoes da NF-e",
         "description": "Retorna as informações da NF-e referente à chave de acesso pesquisada",
@@ -102,7 +108,7 @@
     "/v1/nfe/push/clientes": {
       "post": {
         "tags": [
-          "pushnfe"
+          "Notificação NF-e - Subscrição"
         ],
         "summary": "Cadastra a URL do cliente para o qual a notificação será enviada",
         "requestBody": {
@@ -129,9 +135,9 @@
         },
         "callbacks": {
           "notificacao": {
-            "{$request.body/urlNotificacao}": {
+            "{$request.body#/urlNotificacao}": {
               "post": {
-                "description": "Chamada enviada à URL do cliente, informando que uma das NF-e monitorada sofreu alteração",
+                "description": "Sempre que uma das NF-e monitoradas for atualizada, o callback fará uma requisição HTTP REST para um serviço hospedado pelo cliente. A chamada será feita para a URL do cliente, informando que uma das NF-e monitorada sofreu alteração",
                 "requestBody": {
                   "required": true,
                   "content": {
@@ -154,11 +160,347 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Notificação NF-e - Subscrição"
+        ],
+        "summary": "Atualiza a URL do cliente para  qual a notificação será enviada",
+        "requestBody": {
+          "description": "No momento, estamos apenas aceitando serviços REST, devidamente hospedados em servidores com URL terminadas em **.com** ou **.br**",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteCadastro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "URL do cliente cadastrada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteCadastroConfirmado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Valor de urlNotificacao inválido ou não informado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/URLInvalida"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao alterar informações de URL do cliente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteErro"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Notificação NF-e - Subscrição"
+        ],
+        "summary": "Consulta a URL cadastrada pelo cliente, para recepção da notificação da NF-e",
+        "responses": {
+          "200": {
+            "description": "URL do cliente encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteRetorno"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "URL do cliente não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do serviço"
+          }
+        }
+      }
+    },
+    "/v1/nfe/push/solicitacoes": {
+      "post": {
+        "tags": [
+          "Notificação NF-e - Monitoração"
+        ],
+        "summary": "Inclui solicitação de monitoração de uma ou mais NF-e",
+        "responses": {
+          "201": {
+            "description": "Solicitação de monitoração de uma ou mais NF-e cadastrada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoCadastro"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Não há URL de notificação cadastrada previamente pelo cliente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoCadastroErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do serviço"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Notificação NF-e - Monitoração"
+        ],
+        "summary": "Consulta todas as solicitações de monitoração de NF-e cadastradas",
+        "responses": {
+          "200": {
+            "description": "Lista de solicitações retornada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SolicitacaoCadastro"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Nenhuma solicitação encontrada para o cliente"
+          },
+          "500": {
+            "description": "Erro interno do serviço"
+          }
+        }
+      }
+    },
+    "/v1/nfe/push/solicitacoes/{solicitacaoId}": {
+      "delete": {
+        "tags": [
+          "Notificação NF-e - Monitoração"
+        ],
+        "summary": "Remove solicitação de monitoração cadastrada",
+        "parameters": [
+          {
+            "name": "solicitacaoId",
+            "in": "path",
+            "description": "Número da solicitação de monitoração",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Solicitação excluída com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoExclusao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Id da solicitação inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoExclusaoErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id da solicitação não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do serviço"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Notificação NF-e - Monitoração"
+        ],
+        "summary": "Consulta solicitação de monitoração de NF-e cadastradas",
+        "parameters": [
+          {
+            "name": "solicitacaoId",
+            "in": "path",
+            "description": "Número da solicitação de monitoração",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna as informações da Solicitação cadastrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitacaoCadastro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Solicitação não encontrada"
+          },
+          "500": {
+            "description": "Erro interno do serviço"
+          }
+        }
       }
     }
   },
   "components": {
     "schemas": {
+      "SolicitacaoExclusao": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de erro de validação",
+            "example": "Solicitação excluída com sucesso"
+          }
+        }
+      },
+      "SolicitacaoExclusaoErro": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Mensagem de erro de validação"
+          },
+          "type": {
+            "type": "string",
+            "description": "tipo do elemento"
+          },
+          "path": {
+            "type": "string",
+            "description": "caminho do elemento"
+          },
+          "value": {
+            "type": "string",
+            "description": "valor do elemento"
+          }
+        }
+      },
+      "SolicitacaoCadastroErro": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de erro de validação",
+            "example": "Necessário cadastrar antes uma URL para receber notificações push"
+          }
+        }
+      },
+      "SolicitacaoCadastro": {
+        "type": "object",
+        "properties": {
+          "solicitacaoId": {
+            "type": "string",
+            "description": "Id único de uma requisição, em formato Base64",
+            "example": "lOYKqr7HfhcDuJA"
+          },
+          "chavesMonitoracao": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Chave de 44 posições da NF-e",
+              "example": [
+                "12345678901234567890123456789012345678901234",
+                "43210987654321098765432109876543210987654321"
+              ]
+            }
+          },
+          "dataCriacao": {
+            "type": "string",
+            "description": "Data/Hora de criação da monitoração",
+            "example": "2019-12-20T03:00:00.000Z"
+          },
+          "dataExpiracao": {
+            "type": "string",
+            "description": "Data/Hora de expiração da monitoração",
+            "example": "2019-12-20T03:00:00.000Z"
+          },
+          "clienteId": {
+            "type": "string",
+            "description": "CNPJ do cliente",
+            "example": "33683111000107"
+          }
+        }
+      },
+      "ClienteRetorno": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CNPJ do cliente",
+            "example": "33683111000107"
+          },
+          "urlNotificacao": {
+            "type": "string",
+            "description": "URL cadastrada pelo cliente",
+            "example": "https://meuservico.cliente.com.br/notificacao"
+          },
+          "dataCriacao": {
+            "type": "string",
+            "description": "Data de cadastro da URL do cliente",
+            "example": "2019-01-01T00:00:00.000Z"
+          },
+          "dataAtualizacao": {
+            "type": "string",
+            "description": "Data de atualização da URL do cliente",
+            "example": "2019-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "ClienteErro": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de erro de validação",
+            "example": "Não foi possível alterar dados do cliente"
+          }
+        }
+      },
+      "URLInvalida": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de erro de validação",
+            "example": "Valor de urlNotificacao inválido"
+          }
+        }
+      },
       "NotificacaoNFe": {
         "type": "object",
         "properties": {
