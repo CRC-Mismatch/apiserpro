@@ -1266,71 +1266,71 @@
           }
         },
         "procEventosNFe": {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "evento": {
+                "type": "object",
                 "properties": {
-                  "evento": {
+                  "infEvento": {
                     "type": "object",
                     "properties": {
-                      "infEvento": {
+                      "cOrgao": {
+                        "type": "number",
+                        "example": 91
+                      },
+                      "dhEvento": {
+                        "type": "string",
+                        "example": "2019-12-19T19:50:06-03:00"
+                      },
+                      "detEvento": {
                         "type": "object",
                         "properties": {
-                          "cOrgao": {
-                            "type": "number",
-                            "example": 91
-                          },
-                          "dhEvento": {
+                          "descEvento": {
                             "type": "string",
-                            "example": "2019-12-19T19:50:06-03:00"
-                          },
-                          "detEvento": {
-                            "type": "object",
-                            "properties": {
-                              "descEvento": {
-                                "type": "string",
-                                "example": "Registro Passagem Automatico MDF-e com CT-e" 
-                              }
-                            }
-                          },
-                          "tpEvento": {
-                            "type": "string",
-                            "example": 610554
+                            "example": "Registro Passagem Automatico MDF-e com CT-e" 
                           }
                         }
+                      },
+                      "tpEvento": {
+                        "type": "string",
+                        "example": 610554
                       }
                     }
-                  },
-                  "retEvento": {
-                    "type": "object",
-                    "properties": {
-                      "infEvento": {
-                        "type": "object",
-                        "properties": {
-                          "cOrgao": {
-                            "type": "number",
-                            "example": 91
-                          },
-                          "nProt": {
-                            "type": "number",
-                            "example": 891193694384618
-                          },
-                          "dhRegEvento": {
-                            "type": "string",
-                            "example": "2019-12-19T19:50:06-03:00" 
-                          },
-                          "tpEvento": {
-                            "type": "string",
-                            "example": 610554
-                          }
-                        }
-                      }
-                    }
-                  }            
+                  }
                 }
-              }
+              },
+              "retEvento": {
+                "type": "object",
+                "properties": {
+                  "infEvento": {
+                    "type": "object",
+                    "properties": {
+                      "cOrgao": {
+                        "type": "number",
+                        "example": 91
+                      },
+                      "nProt": {
+                        "type": "number",
+                        "example": 891193694384618
+                      },
+                      "dhRegEvento": {
+                        "type": "string",
+                        "example": "2019-12-19T19:50:06-03:00" 
+                      },
+                      "tpEvento": {
+                        "type": "string",
+                        "example": 610554
+                      }
+                    }
+                  }
+                }
+              }            
+            }
           }
         }
-      },
+      }
+    },
     "Status": {
       "type": "object",
       "properties": {
