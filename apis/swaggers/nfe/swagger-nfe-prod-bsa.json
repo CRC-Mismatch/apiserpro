@@ -1261,7 +1261,8 @@
               }
             },
             "Versao": {
-              "type": "number"
+              "type": "number",
+              "example": 4
             }
           }
         },
