@@ -19,19 +19,19 @@
   "info": {
     "version": "1.0",
     "title": "API NF-e",
-    "description": "Para informações de como se autenticar antes de consumir a API, por favor, consulte a documentação em: http://devserpro.github.io/apiserpro/ \n\nOs serviços `Consulta Nota Fiscal Eletrônica` e `Push NFe` são disponibilizados através do `HTTP REST`. Oferencendo operações para consulta de notas fiscais eletrônicas e também enviando notificações de atualizações de determinadas notas, através de sua chave de acesso. \n<br>\n ## Serviço push NF-e \n\n O cliente recebe uma notificação, informando que determinada NF-e já incluída em um solicitação de monitoração teve atualização. \n\n  Método post de notificação: \n\n  {  \n   \"chaveNFe\": \"CHAVE_NFE\", \n  \"dataHoraEnvio\": \"DATA_HORA\"  \n   }  \n\n O cliente deve implementar em sua aplicação o tratamento deste método Post. \n<br>\n ## Códigos de retorno não tarifados da consulta NF-e\n|  Código de retorno |  Resumido |  Explicação |\n| ------------- |:--------------------|:----------------------------------------------------------------------------- |\n| &nbsp;           | &nbsp;    | &nbsp;  | \n |400           | Requisição inválida    | O número da chave informado não é válido.       |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 404           | Not found    | O número da chave informado não foi encontrado.  |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 406           | Not Acceptable    | O formato do arquivo de saída deve ser Json/Xml. |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 500           | Erro no Servidor | Ocorreu algum erro no servidor.      |\n<br>\n ## Leiautes e formatos \n\n<br>As informações da NF-e disponibilizadas estão de acordo com o leiaute da NF-e, disponibilizado pelo Encontro Nacional de Coordenadores e Administradores Tributários Estaduais (ENCAT). \n<br><br>\n As Notas Técnicas com as informações de leiaute da NF-e estão disponíveis para *download* em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=tW+YMyk/50s= \n<br><br>\n A estrutura do JSON de retorno seguem as mesmas especificações dos esquemas XML dos Web Services, disponibilizados em http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/fwLvLUSmU8= \n<br><br>\n Os campos do `TIPO NUMÉRICO`, o JSON de retorno irá devolver no `formato number`. E caso o valor numérico do campo seja um valor muito grande, o retorno poderá aparecer no json no `formato de notação científica`. Cabe a aplicação que consome o serviço da API dar o tratamento adequado para campos numéricos. \n<br>\n## Solicitando assinatura com carimbo de tempo\n\n  Caso deseje que sua solicitação venha com uma assinatura de Carimbo de Tempo, basta incluir, no cabeçalho de sua requisição, a informação `x-signature: 1`.\n  \n  A assinatura será retornada no cabeçalho da resposta, com o nome `stamp`.\n<br>\n## Verificando assinatura com carimbo de tempo\n\n  Para verificar assinatura de carimbo de tempo, siga as instruções da documentação abaixo:\n  \n[Documentação - Verificação Carimbo de Tempo](https://devserpro.github.io/apiserpro/apis/swagger-ui-master/dist/index.html?bearer=4e1a1858bdd584fdc077fb7d80f39283&url=https://devserpro.github.io/apiserpro/apis/swaggers/carimbo-tempo/swagger-timestampcheck-trial-bsa.json#!/default/post_check)\n<br>\n## Campo cabeçalho da requisição (X-Request-Tag)\n\n  Este campo é opcional na utilização das chamadas às APIs / Datavalid e serve como identificador de requisições. Caso uma empresa necessite, por exemplo, agrupar a quantidade de requisições realizadas por cada departamento, poderá utilizar este campo de forma a identificar no faturamento a quantidade de requisições de cada item agrupador. \n<br><br>\n O campo é de texto livre (string até 32 caracteres) e não possui validação de seu conteúdo. Cabe, portanto, ao cliente manter o controle das informações que são enviadas para esse campo de forma que o relatório de faturamento faça o agrupamento adequado. \n<br><br>\n Este atributo pode ser usado pela entidade de classe e/ou grupo econômico na modalidade global com ônus entidade para fins de identificação do associado que realiza a requisição. No caso de entidades de classe ou grupos econômicos que realizem a contratação com ônus para o associado não é necessário realizar o agrupamento pois cada associado irá possuir sua própria chave de consumo.\n<br>\n## Endereço base de produção \n https://apigateway.serpro.gov.br/nfe/1 \n<br>\n ## Endereço base de degustação \n https://apigateway.serpro.gov.br/nfe-trial/1 \n<br>\n## Exemplo de chamada e retorno da Consulta NF-e\n### Chamada\n    https://apigateway.serpro.gov.br/nfe-trial/1/35161147508411011603551000077959551093041003 \n<br>\n ### Retorno \n\n   O retorno será do tipo `arquivo.json` ou `arquivo.xml`"
+    "description": "For information on authenticating before consuming the APIs, please refer to the documentation at: http://devserpro.github.io/apiserpro/ \n\n`The Electronic Invoice Inquiry` and `Push NFe`services are available through `HTTP REST`. Offering operations for checking electronic invoices and also sending notifications of updates of certain invoices, through your access key. \n<br>\n ## NF-e push service \n\n The client receives a notification that a particular NF-e already included in a monitoring request has been updated. \n\n  Notification post method: \n\n  {  \n   \"chaveNFe\": \"CHAVE_NFE\", \n  \"dataHoraEnvio\": \"DATA_HORA\"  \n   }  \n\n The client must implement the treatment of this Post method in his application. \n<br>\n ## Non Tariff Return Codes of Electronic Invoice Inquiry\n|  Return Code |  Summary |  Explanation |\n| ------------- |:--------------------|:----------------------------------------------------------------------------- |\n| &nbsp;           | &nbsp;    | &nbsp;  | \n |400           | nvalid request    | The key number entered is not valid.       |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 404           | Not found    | The key number you entered was not found.  |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 406           | Not Acceptable    | The output file format must be Json/Xml. |\n| &nbsp;           | &nbsp;    | &nbsp;  |\n| 500           | Server Error | A server error has occurred.      |\n<br>\n ## Layouts and Formats \n\n<br>The NF-e information provided is in accordance with the NF-e layout provided by the National Meeting of State Tax Coordinators and Administrators (ENCAT). \n<br><br>\n Technical Notes with NF-e layout information are available for download at http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=tW+YMyk/50s= \n<br><br>\n The return JSON strcuture follows the same specifications as Web Services XML schemas, available at http://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/fwLvLUSmU8= \n<br><br>\n The fields of the `NUMERIC TYPE`, the JSON return will return the field in `number format`and if the numeric value of the field is too large, the return may appear in json in `scientific notation format`. It is up to the application that consumes the API service to give proper treatment for numeric fields. \n<br>\n## Requesting Time Stamp signature\n\n  If you want your request to come with a Time Stamp signature, just include, in the header of your request, the `x-signature information: 1.`.\n  \n  The signature will be returned in the header of the reply, with the name stamp.\n<br>\n## Checking signature with Time Stamp\n\n  To verify time stamp signature, follow the documentation instructions below::\n  \n[Documentation - Time Stamp Verification](https://devserpro.github.io/apiserpro/apis/swagger-ui-master/dist/index.html?bearer=4e1a1858bdd584fdc077fb7d80f39283&url=https://devserpro.github.io/apiserpro/apis/swaggers/carimbo-tempo/swagger-timestampcheck-trial-bsa.json#!/default/post_check)\n<br>\n## Request Header Field (X-Request-Tag)\n\n  This field is optional when using API / Datavalid calls and serves as a request identifier. If a company needs, for example, to group the number of requests made by each department, you can use this field to identify in invoicing the number of requests of each grouping item. \n<br><br>\n The field is free text (string up to 32 characters) and has no validation of its content. It is therefore up to the customer to keep track of the information that is sent to this field so that the billing report does the proper grouping. \n<br><br>\n This attribute may be used by the class entity and / or economic group in the global entity-burden mode for the purpose of identifying the requesting member. In the case of class entities or economic groups that contract with a charge to the member, it is not necessary to group because each member will have his own consumption key.\n<br>\n## Base Production Address \n https://apigateway.serpro.gov.br/nfe/1 \n<br>\n ## Degustation Base Address \n https://apigateway.serpro.gov.br/nfe-trial/1 \n<br>\n## Call and Return Example of Electronic Invoice Inquiry\n### Call\n    https://apigateway.serpro.gov.br/nfe-trial/1/35161147508411011603551000077959551093041003 \n<br>\n ### Return \n\n   The return will be of type `file.json` or `file.xml`"
   },
   "basePath": "/nfe/1",
   "paths": {
     "/{chave}": {
       "get": {
         "tags": [
-          "Consulta NFe"
+          "Invoice Inquiry NFe"
         ],
-        "summary": "Consulta nota fiscal eletrônica",
+        "summary": "Electronic Invoice Inquiry",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": "Retorna as informações da NF-e com a chave de acesso informada. \n### Notas Fiscais Eletrônicas disponíveis para Degustação\n| Chave | Observação |\n| ---------------------- | ----------|\n| 35170608530528000184550000000154301000771561 | |\n| 35161147508411011603551000077959551093041003 | |\n| 53131205035672000156550010000004991543410167 | |\n| 42140612687276000179550010001505671172228752 | |\n| 35140903608306000202555000001100251571436929 | |\n| 53150337992500000167550010000029521000029516 | |\n| 31150917591579000107550010000014321081035918 | |\n| 35151200991908000104550020000063951000184833 | |\n| 31160906347409006953550110008369841081956475 | |\n| 31170309339936000973550250002397736362483965 | |\n| 35160900623904000335550010028792431858713854 | |\n| 35170300776574000156550020009091941178378523 | |\n| 53160911510448000171550010000106771000187760 | |\n| 52160819015622000111550010000007051300828370 | |\n| 53160621182711000102550010000012921000042921 | |\n| 52160609303953000101550010000008711000045330 | |\n| 53151205642646000196550010000287891000219878 | |\n| 53160713453539000148550010000009101000070190 | |\n| 52151013766790000162550010000028401250000010 | |\n| 53160705642646000196550010000298141000284189 | |\n| 52160400945852000151550010000041771020601080 | |\n| 24190201243220000109550010000007251000007252 | |\n| 24190420412822000197550010000004701000001816 | |\n| 25190400785860000188550010000000061000000868 | |\n| 29190332994770000193550020000000107000000124 | |\n| 33190403282458000179550010001434641841176079 | |\n| 87878774456468954646464654654546545446579312 | Essa NFe possui todos os array |\n|",
+        "description": "Returns the NF-e information with the entered access key. \n### Electronic Invoices available for Degustation\n| key | Observation |\n| ---------------------- | ----------|\n| 35170608530528000184550000000154301000771561 | |\n| 35161147508411011603551000077959551093041003 | |\n| 53131205035672000156550010000004991543410167 | |\n| 42140612687276000179550010001505671172228752 | |\n| 35140903608306000202555000001100251571436929 | |\n| 53150337992500000167550010000029521000029516 | |\n| 31150917591579000107550010000014321081035918 | |\n| 35151200991908000104550020000063951000184833 | |\n| 31160906347409006953550110008369841081956475 | |\n| 31170309339936000973550250002397736362483965 | |\n| 35160900623904000335550010028792431858713854 | |\n| 35170300776574000156550020009091941178378523 | |\n| 53160911510448000171550010000106771000187760 | |\n| 52160819015622000111550010000007051300828370 | |\n| 53160621182711000102550010000012921000042921 | |\n| 52160609303953000101550010000008711000045330 | |\n| 53151205642646000196550010000287891000219878 | |\n| 53160713453539000148550010000009101000070190 | |\n| 52151013766790000162550010000028401250000010 | |\n| 53160705642646000196550010000298141000284189 | |\n| 52160400945852000151550010000041771020601080 | |\n| 24190201243220000109550010000007251000007252 | |\n| 24190420412822000197550010000004701000001816 | |\n| 25190400785860000188550010000000061000000868 | |\n| 29190332994770000193550020000000107000000124 | |\n| 33190403282458000179550010001434641841176079 | |\n| 87878774456468954646464654654546545446579312 | This NFe has all the arrays |\n|",
         "consumes": [
           "application/json",
           "application/xml"
@@ -46,16 +46,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Chave de acesso da NF-e (44 dígitos, sem espaços)"
+            "description": "key: NF-e access key (44 digits, no spaces)"
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -63,22 +63,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna os dados da NF-e correspondente à chave de acesso informada",
+            "description": "Returns the NF-e data corresponding to the entered access key",
             "schema": {
               "$ref": "#/definitions/NFe"
             }
           },
           "400": {
-            "description": "A chave de acesso informada não é válida."
+            "description": "The access key you entered is not valid."
           },
           "404": {
-            "description": "Não existe NF-e com chave de acesso informada."
+            "description": "There is no NF-e with an informed access key."
           },
           "406": {
-            "description": "O formato do arquivo de saída deve ser Json/Xml."
+            "description": "The output file format must be Json/Xml."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -88,10 +88,10 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Cadastra informações do cliente",
+        "summary": "Register customer information",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes\n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs cadastradas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      ou \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
+        "description": " \n\n## Example\n#### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes\n    \n    \n\n#### URL Terminations\n\n    Customer monitoring requests will only be notified if the registered URLs end with .br or .com. See the examples:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Input content\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      or \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Return\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.com\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } \n\n                      or \n\n    { \n      \"Id\": \"000000000000000\", \n      \"urlNotificacao\": \"https://url_cliente.br\", \n      \"dataCriacao\": \"2019-12-20T03:00:00.000Z\" \n    } ",
         "consumes": [
           "application/json"
         ],
@@ -100,7 +100,7 @@
         ],
         "parameters": [
           {
-            "description": "Dados do cliente",
+            "description": "Customer Data",
             "name": "body",
             "in": "body",
             "required": false,
@@ -109,13 +109,13 @@
             }
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -123,16 +123,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Cliente cadastrado com sucesso.",
+            "description": "Customer successfully registered.",
             "schema": {
               "$ref": "#/definitions/confirmacaoCadastramentoCliente"
             }
           },          
           "400": {
-            "description": "Valor de 'urlNotificacao' inválido."
+            "description": "Invalid 'urlNotificacao' value."
           },
           "500": {
-            "description": "Erro interno do servidor."
+            "description": "Internal Server Error."
           }
         }
       },
@@ -140,10 +140,10 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Atualiza informações do cliente",
+        "summary": "Update Customer Information",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes \n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
+        "description": " \n\n## Example\n#### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes \n    \n    \n\n#### URL Terminations\n\n    Customer tracking requests received notifications only if the updated URLs end with .br or .com. See the examples:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Input content\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      or \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Return\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
         "consumes": [
           "application/json"
         ],
@@ -152,7 +152,7 @@
         ],
         "parameters": [
           {
-            "description": "Dados do cliente",
+            "description": "Customer Data",
             "name": "body",
             "in": "body",
             "required": false,
@@ -161,13 +161,13 @@
             }
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -175,13 +175,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Dados alterados com sucesso."
+            "description": "Data changed successfully."
           },          
           "400": {
-            "description": "Valor de 'urlNotificacao' inválido."
+            "description": "Invalid 'urlNotificacao' value."
           },
           "500": {
-            "description": "Erro interno do servidor."
+            "description": "Internal Server Error."
           }
         }
       },
@@ -189,11 +189,11 @@
         "tags": [
           "Push NFe - Clientes"
         ],
-        "summary": "Consulta informações do cliente",
+        "summary": "Consults all monitoring requests from a customer",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes\n    \n    \n\n#### Terminações da URL\n\n    As solicitações de monitoração dos clientes só receberam as devidas notificações se as URLs atualizadas terminarem com .br ou .com. Veja os exemplos:                                              https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Conteúdo de entrada\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Retorno\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    } ",
-         "consumes": [
+        "description": " \n\n## Example\n#### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/clientes\n    \n    \n\n#### URL Terminations\n\n    Customer tracking requests received notifications only if the updated URLs end with .br or .com. See the examples:                                               https://url_cliente.com                                                                   https://url_cliente.br \n\n#### Input content\n    { \n      \"urlNotificacao\": \"https://url_cliente.com\" \n    }\n\n                      ou \n\n    { \n      \"urlNotificacao\": \"https://url_cliente.br\" \n    } \n  #### Return\n    { \n      \"mensagem\": \"Dados alterados com sucesso.\"\n    }  ",
+        "consumes": [
           "application/json"
         ],
         "produces": [
@@ -201,13 +201,13 @@
         ],
         "parameters": [
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -215,13 +215,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna os dados do cliente",
+            "description": "Returns customer data",
             "schema": {
               "$ref": "#/definitions/consultarClientes"
             }
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -231,10 +231,10 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Inclui solicitação de monitoração",
+        "summary": "Include monitoring request",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes \n\n    O cliente pode incluir a partir de uma solicitação várias Notas Fiscais Eletrônicas para serem monitoradas. \n\n      \n#### Conteúdo de entrada\n    { \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\",\n         \"43190788910252000603550010000375791937008291\"\n      ]    \n    } \n  ####  Retorno\n    { \n      \"solicitacaoId\": \"lOYKqr7HfhcDuJA\", \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\", \n         \"43190788910252000603550010000375791937008291\"\n      ], \n      \"dataCriacao\": \"2019-11-20T15:57:39.917Z\", \n      \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n      \"clienteId\": \"00000000000000\" \n    } ",
+        "description": " \n\n## Exemple\n#### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes \n\n    The customer may include from one request several Electronic Invoices to be monitored. \n\n      \n#### Input content\n    { \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\",\n         \"43190788910252000603550010000375791937008291\"\n      ]    \n    } \n  ####  Return\n    { \n      \"solicitacaoId\": \"lOYKqr7HfhcDuJA\", \n      \"chavesMonitoracao\": [ \n         \"43190788910252000603550010000375791937008290\", \n         \"43190788910252000603550010000375791937008291\"\n      ], \n      \"dataCriacao\": \"2019-11-20T15:57:39.917Z\", \n      \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n      \"clienteId\": \"00000000000000\" \n    } ",
         "consumes": [
           "application/json"
         ],
@@ -243,7 +243,7 @@
         ],
         "parameters": [
           {
-            "description": "Dados da solicitação de monitoração a ser gerada",
+            "description": "Monitoring request data to be generated",
             "name": "body",
             "in": "body",
             "required": true,
@@ -252,13 +252,13 @@
             }
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -266,13 +266,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Retorna os dados de confirmação de inclusão de solicitação.",
+            "description": "Returns request inclusion confirmation data.",
             "schema": {
               "$ref": "#/definitions/confirmacaoSolicitacao"
             }
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       },
@@ -280,10 +280,10 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Consulta todas as solicitações de monitoração de um cliente",
+        "summary": "Queries all monitoring requests from a client",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " ## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes\n    \n #### Conteúdo de entrada \n    {\n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes\" \n    } \n  #### \n  #### Retorno \n    [ \n      { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:01.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:02.213Z\" \n            } \n         ] \n      }, \n      { \n        \"solicitacaoId\": \"dbo5wvBsVy52kpY\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008292\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:03.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008293\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:04.213Z\" \n            } \n         ] \n      } \n       \n    ] ",
+        "description": " ## Exemple\n#### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes\n    \n #### Input content \n    {\n      \"url\": \"https://valapinfe2.estaleiro.serpro.gov.br/push/solicitacoes\" \n    } \n  #### \n  #### Return \n    [ \n      { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:01.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:02.213Z\" \n            } \n         ] \n      }, \n      { \n        \"solicitacaoId\": \"dbo5wvBsVy52kpY\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"http://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008292\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:03.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008293\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:04.213Z\" \n            } \n         ] \n      } \n       \n    ] ",
         "consumes": [
           "application/json"
         ],
@@ -292,13 +292,13 @@
         ],
         "parameters": [
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -306,13 +306,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna todas as solicitações de um cliente",
+            "description": "Return all requests from a client",
             "schema": {
               "$ref": "#/definitions/consultarSolicitacoes"
             }
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -322,10 +322,10 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Consulta uma solicitação de monitoração",
+        "summary": "Queries a monitoring request",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  al2sDBn6KNVpleB <br><br><br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes/{solicitacaoId}\n    \n     \n  #### Retorno\n    { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.213Z\" \n            } \n         ] \n    } \n \n",
+        "description": " \n\n## Exemple\n #### Solicitation for Degustation: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  al2sDBn6KNVpleB <br><br><br>\n  #### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes/{solicitacaoId}\n    \n     \n  #### Return\n    { \n        \"solicitacaoId\": \"al2sDBn6KNVpleB\", \n        \"clienteId\": \"00000000000000\", \n        \"urlNotificacao\": \"https://url_cliente.com\", \n        \"dataCriacao\": \"2019-11-20T15:57:18.793Z\", \n        \"dataExpiracao\": \"2019-12-20T03:00:00.000Z\", \n        \"chavesMonitoracao\": [ \n            { \n              \"chave\": \"43190788910252000603550010000375791937008290\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.212Z\" \n            }, \n            { \n              \"chave\": \"43190788910252000603550010000375791937008291\", \n              \"entregue\": false, \n              \"dataEntrega\": \"2019-11-21T15:15:00.213Z\" \n            } \n         ] \n    } \n \n",
         "consumes": [
           "application/json"
         ],
@@ -336,18 +336,18 @@
           {
             "name": "solicitacaoId",
             "in": "path",
-            "description": "Código da solicitação",
+            "description": "Request code",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -355,16 +355,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna os dados de uma determinada solicitação.",
+            "description": "Returns the data of a given request.",
             "schema": {
               "$ref": "#/definitions/consultarSolicitacao"
             }
           },
           "404": {
-            "description": "A solicitação informada não foi encontrada."
+            "description": "The requested request was not found."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       },
@@ -372,10 +372,10 @@
         "tags": [
           "Push NFe - Solicitações"
         ],
-        "summary": "Exclui uma solicitação de monitoração",
+        "summary": "Delete a particular monitoring request",
         "x-auth-type": "Application & Application User",
         "x-throttling-tier": "Unlimited",
-        "description": " \n\n## Exemplo\n #### Solicitação para degustação: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;al2sDBn6KNVpleB \n<br>\n  #### Chamada\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes/{solicitacaoId} \n\n#### Retorno\n    { \n        \"mensagem\": \"Solicitação excluída com sucesso.\"\n    } \n",
+        "description": " \n\n## Exemple\n #### Request for degustation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;al2sDBn6KNVpleB \n<br>\n  #### Call\n\n    https://apigateway.serpro.gov.br/nfe/1/push/solicitacoes/{solicitacaoId} \n\n#### Return\n    { \n        \"mensagem\": \"Solicitação excluída com sucesso.\"\n    } \n",
         "consumes": [
           "application/json"
         ],
@@ -386,18 +386,18 @@
           {
             "name": "solicitacaoId",
             "in": "path",
-            "description": "Código da solicitação",
+            "description": "Request code",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Solicitação de assinatura de carimbo de tempo. Informe 1 para assinar, ou deixe em branco para não assinar.",
+            "description": "Time stamp signature request. Enter 1 to sign, or leave blank not to sign.",
             "name": "X-signature",
             "in": "header",
             "type": "string"
           },
           {
-            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres",
+            "description": "Optional field to identify requests. The content is free text so that the client can identify the origin of the request, there is no validation of its content by the API. Maximum 32 characters",
             "name": "X-Request-Tag",
             "in": "header",
             "type": "string"
@@ -405,13 +405,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Solicitação excluída com sucesso."
+            "description": "Request successfully deleted."
           },
           "404": {
-            "description": "A solicitação informada não foi encontrada."
+            "description": "The requested request was not found."
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -421,10 +421,10 @@
         "tags": [
           "Status"
         ],
-        "summary": "Verifica status da API",
+        "summary": "heck API Status",
         "responses": {
           "200": {
-            "description": "Serviço disponível",
+            "description": "Service available",
             "schema": {
               "$ref": "#/definitions/Status"
             },
@@ -433,7 +433,7 @@
             }
           },
           "500": {
-            "description": "Serviço indisponível",
+            "description": "Unavailable service",
             "schema": {
               "$ref": "#/definitions/Status"
             },
