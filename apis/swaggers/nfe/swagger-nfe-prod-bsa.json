@@ -689,95 +689,92 @@
                             "example": 1
                           },
                           "prod": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "cEAN": {
-                                  "type": "string",
-                                  "example": "SEM GTIN"
-                                },
-                                "cProd": {
-                                  "type": "string",
-                                  "example": "JC59-00035A-SI"
-                                },
-                                "qCom": {
-                                  "type": "number",
-                                  "example": 1
-                                },
-                                "cEANTrib": {
-                                  "type": "string",
-                                  "example": "SEM GTIN"
-                                },
-                                "vUnTrib": {
-                                  "type": "number",
-                                  "example": 265.79
-                                },
-                                "qTrib": {
-                                  "type": "number",
-                                  "example": 1
-                                },
-                                "vProd": {
-                                  "type": "number",
-                                  "example": 265.79
-                                },
-                                "xProd": {
-                                  "type": "string",
-                                  "example": "UNIDADE DE DISCO RIGIDO 320GB"
-                                },
-                                "vUnCom": {
-                                  "type": "number",
-                                  "example": 265.79
-                                },
-                                "indTot": {
-                                  "type": "integer",
-                                  "example": 1
-                                },
-                                "uTrib": {
-                                  "type": "string",
-                                  "example": "UN"
-                                },
-                                "NCM": {
-                                  "type": "integer",
-                                  "example": 84717012
-                                },
-                                "uCom": {
-                                  "type": "string",
-                                  "example": "UN"
-                                },
-                                "CFOP": {
-                                  "type": "integer",
-                                  "example": 5949
-                                },
-                                "CEST": {
-                                  "type": "integer",
-                                  "example": 2103300
-                                },
-                                "rastro": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "nLote": {
-                                        "type": "string",
-                                        "example": "Lote 1"
-                                      },
-                                      "qLote": {
-                                        "type": "number",
-                                        "example": 18
-                                      },
-                                      "dFab": {
-                                        "type": "string",
-                                        "example": "2019-07-22"
-                                      },
-                                      "dVal": {
-                                        "type": "string",
-                                        "example": "2020-06-22"
-                                      },
-                                      "cAgreg": {
-                                        "type": "string",
-                                        "example": "Agregador 1"
-                                      }
+                            "type": "object",
+                            "properties": {
+                              "cEAN": {
+                                "type": "string",
+                                "example": "SEM GTIN"
+                              },
+                              "cProd": {
+                                "type": "string",
+                                "example": "JC59-00035A-SI"
+                              },
+                              "qCom": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "cEANTrib": {
+                                "type": "string",
+                                "example": "SEM GTIN"
+                              },
+                              "vUnTrib": {
+                                "type": "number",
+                                "example": 265.79
+                              },
+                              "qTrib": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "vProd": {
+                                "type": "number",
+                                "example": 265.79
+                              },
+                              "xProd": {
+                                "type": "string",
+                                "example": "UNIDADE DE DISCO RIGIDO 320GB"
+                              },
+                              "vUnCom": {
+                                "type": "number",
+                                "example": 265.79
+                              },
+                              "indTot": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "uTrib": {
+                                "type": "string",
+                                "example": "UN"
+                              },
+                              "NCM": {
+                                "type": "integer",
+                                "example": 84717012
+                              },
+                              "uCom": {
+                                "type": "string",
+                                "example": "UN"
+                              },
+                              "CFOP": {
+                                "type": "integer",
+                                "example": 5949
+                              },
+                              "CEST": {
+                                "type": "integer",
+                                "example": 2103300
+                              },
+                              "rastro": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "nLote": {
+                                      "type": "string",
+                                      "example": "Lote 1"
+                                    },
+                                    "qLote": {
+                                      "type": "number",
+                                      "example": 18
+                                    },
+                                    "dFab": {
+                                      "type": "string",
+                                      "example": "2019-07-22"
+                                    },
+                                    "dVal": {
+                                      "type": "string",
+                                      "example": "2020-06-22"
+                                    },
+                                    "cAgreg": {
+                                      "type": "string",
+                                      "example": "Agregador 1"
                                     }
                                   }
                                 }
