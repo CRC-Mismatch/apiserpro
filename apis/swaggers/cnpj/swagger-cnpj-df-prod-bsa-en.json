@@ -23,7 +23,7 @@
     "/cnpj/{ni}": {
       "get": {
         "tags": [
-          "Consulta CNPJ DF"
+          "Check CNPJ DF"
         ],
         "summary": "Check the CNPJ DF",
         "x-auth-type": "Application & Application User",
