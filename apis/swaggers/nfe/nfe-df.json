@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "API Consulta NF-e (modalidade Direto na Faixa)",
-    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferencendo operações para consulta de notas fiscais eletrônicas, e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use o token de acesso: `Bearer 4e1a1858bdd584fdc077fb7d80f39283` e as chaves da [Lista de Chaves para teste](https://cliente.serpro.gov.br)<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br) <br/><br/>",
+    "description": "O serviço **Nota Fiscal Eletrônica** é disponibilizado através do **HTTP REST**, oferecendo operações para consulta de notas fiscais eletrônicas, e também para recebimento de notificações de atualizações de determinadas notas, através de monitoração de sua chave de acesso.<br/><br/>\nPara testes no ambiente trial, use o token de acesso: `Bearer 4e1a1858bdd584fdc077fb7d80f39283` e as chaves da [Lista de Chaves para teste](https://cliente.serpro.gov.br)<br/><br/>\nPara testes no ambiente produtivo, obtenha o token de acesso através da [Área do Cliente](https://cliente.serpro.gov.br) <br/><br/>",
     "version": "api"
   },
   "externalDocs": {
