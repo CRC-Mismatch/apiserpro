@@ -784,19 +784,6 @@
                           "imposto": {
                             "type": "object",
                             "properties": {
-                              "ICMS": {
-                                "type": "object",
-                                "properties": {
-                                  "orig": {
-                                    "type": "integer",
-                                    "example": 1
-                                  },
-                                  "CST": {
-                                    "type": "integer",
-                                    "example": 41
-                                  }
-                                }
-                              },
                               "IPI": {
                                 "type": "object",
                                 "properties": {
@@ -822,7 +809,7 @@
                                     "type": "object",
                                     "properties": {
                                       "CST": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "example": "07"
                                       }
                                     }
@@ -836,7 +823,7 @@
                                     "type": "object",
                                     "properties": {
                                       "CST": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "example": "07"
                                       }
                                     }
@@ -946,7 +933,7 @@
                                 "type": "number",
                                 "example": 265.79
                               },
-                              "tpag": {
+                              "tPag": {
                                 "type": "number",
                                 "example": 99
                               }
@@ -1215,7 +1202,7 @@
                                 "type": "integer",
                                 "example": 1
                               },
-                              "pesoBt": {
+                              "pesoB": {
                                 "type": "number",
                                 "example": 0.033
                               }
@@ -1257,7 +1244,7 @@
                 }
               }
             },
-            "Versao": {
+            "versao": {
               "type": "number",
               "example": 4
             }
