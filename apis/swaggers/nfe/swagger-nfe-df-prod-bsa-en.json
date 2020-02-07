@@ -651,10 +651,10 @@
             "NFe": {
               "type": "object",
               "properties": {
-                "InfNFe": {
+                "infNFe": {
                   "type": "object",
                   "properties": {
-                    "InfAdic": {
+                    "infAdic": {
                       "type": "object",
                       "properties": {
                         "infCpl": {
