@@ -988,6 +988,9 @@
           "403": {
             "description": "Credencial informada não possui permissão para consultar essa Nota de Detalhamento Orçamentário"
           },
+          "404": {
+            "description": "Nota de Detalhamento Orçamentário inexistente"
+          },
           "500": {
             "description": "Erro interno do servidor"
           }
@@ -1118,6 +1121,9 @@
           },
           "403": {
             "description": "Credencial informada não possui permissão para consultar a Nota de Bloqueio de Crédito"
+          },
+          "404": {
+            "description": "Nota de Bloqueio inexistente"
           },
           "500": {
             "description": "Erro interno do servidor"
@@ -1250,6 +1256,9 @@
           "403": {
             "description": "Credencial informada não possui permissão para consultar a Documentos"
           },
+          "404": {
+            "description": "Documento inexistente"
+          },
           "500": {
             "description": "Erro interno do servidor"
           }
@@ -1325,6 +1334,9 @@
           "403": {
             "description": "Credencial informada não possui permissão para consultar a Nota de Dotação Sof"
           },
+          "404": {
+            "description": "Nota de Dotação Sof inexistente"
+          },
           "500": {
             "description": "Erro interno do servidor"
           }
@@ -1372,7 +1384,7 @@
           "200": {
             "description": "Retorna os dados da Nota de Empenho Gerada",
             "schema": {
-              "$ref": "#/definitions/ListaCredores"
+              "$ref": "#/definitions/RetornoGeracaoListaCredores"
             }
           },
           "400": {
@@ -1380,6 +1392,84 @@
           },
           "403": {
             "description": "Usuário não tem permissão para realizar esta operação"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/v2/lista-credor/{ug}/{gestao}/{ano}/{numero}": {
+      "get": {
+        "tags": [
+          "Lista de Credor"
+        ],
+        "summary": "Consulta uma Lista de Credor",
+        "description": "Consulta uma Lista de Credor - LC \n\n## Exemplo\n#### Chamada\n\n    https://apigateway.serpro.gov.br/api-integra-siafi-deg/api/v2/lista-credor/010001/00001/2019/400104\n    \n    No header:\n      x-credencial: NjAxNjU1NzA2NDQuMDEwMDAxLlNJQUZJMjAxOEhN\n      (valor referente às credenciais 60165570644.010001.SIAFI2018HM convertido em Base64. Mais informações na descrição do parâmetro x-credencial, abaixo)\n      \n####  Retorno\n    {\n        \"numeroLista\": \"2019LC400104\",\n        \"numeroDocumentoOB\": \"2019B123456\",\n        \"ugEmitente\": \"010001\",\n        \"gestaoEmitente\": \"00001\",\n        \"nomeUGEmitente\": \"CAMARA DOS DEPUTADOS 2019\",\n        \"valorTotalLista\": \"00000000000005000\",\n        \"qtdItensLista\": \"000005\",\n        \"listaItens\": [\n             {\n                \"sequencial\": \"000002\",\n                \"favorecido\": \"39813134372\",\n                \"bancoOrigem\": \"001\",\n                \"agenciaOrigem\": \"0001\",\n                \"contaCorrenteOrigem\": \"100773\",\n                \"valorCredito\": \"00000000000001000\",\n                \"situacao\": \"I\"\n             },\n             {\n                \"sequencial\": \"000003\",\n                \"favorecido\": \"39813134372\",\n                \"bancoOrigem\": \"001\",\n                \"agenciaOrigem\": \"0001\",\n                \"contaCorrenteOrigem\": \"100773\",\n                \"valorCredito\": \"00000000000001000\",\n                \"situacao\": \"I\"\n             },\n             {\n                \"sequencial\": \"000004\",\n                \"favorecido\": \"39813134372\",\n                \"bancoOrigem\": \"001\",\n                \"agenciaOrigem\": \"0001\",\n                \"contaCorrenteOrigem\": \"100773\",\n                \"valorCredito\": \"00000000000001000\",\n                \"situacao\": \"I\"\n             },\n             {\n                \"sequencial\": \"000005\",\n                \"favorecido\": \"39813134372\",\n                \"bancoOrigem\": \"001\",\n                \"agenciaOrigem\": \"0001\",\n                \"contaCorrenteOrigem\": \"100773\",\n                \"valorCredito\": \"00000000000001000\",\n                \"situacao\": \"I\"\n             },\n             {\n                \"sequencial\": \"000006\",\n                \"favorecido\": \"39813134372\",\n                \"bancoOrigem\": \"001\",\n                \"agenciaOrigem\": \"0001\",\n                \"contaCorrenteOrigem\": \"100773\",\n                \"valorCredito\": \"00000000000001000\",\n                \"situacao\": \"I\"\n             }\n        ]\n    }",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ug",
+            "in": "path",
+            "description": "Código da UG emitente",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gestao",
+            "in": "path",
+            "description": "Código da Gestão",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ano",
+            "in": "path",
+            "description": "Ano da Nota de Dotação Sof",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numero",
+            "in": "path",
+            "description": "Número da Nota de Dotação Soft",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-credencial",
+            "in": "header",
+            "description": "Credenciais de acesso ao SIAFI, no formato [CPF].[UG].[SISTEMA], convertido em Base64. Nesse ambiente de testes, favor não preencher esse campo. Campo obrigatório no ambiente de produção.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Campo opcional para identificar requisições. O conteúdo é um texto livre para que o cliente possa identificar a origem da requisição, não há validação do seu conteúdo pela API. Máximo 32 caracteres.",
+            "name": "X-Request-Tag",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de credores encontrada e retornada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/ConsultaLC"
+            }
+          },
+          "400": {
+            "description": "Algum campo possui informações inválidas"
+          },
+          "403": {
+            "description": "Credencial informada não possui permissão para consultar a Lista de Credores"
+          },
+          "404": {
+            "description": "Lista de Credores inexistente"
           },
           "500": {
             "description": "Erro interno do servidor"
@@ -1429,7 +1519,7 @@
         }
       }
     },
-    "ListaCredores": {
+    "RetornoGeracaoListaCredores": {
       "properties": {
         "ug": {
           "type": "string"
@@ -1476,25 +1566,81 @@
         }
       }
     },
+    "ConsultaLC": {
+      "properties": {
+        "numeroLista": {
+          "type": "string"
+        },
+        "numeroDocumentoOB": {
+          "type": "string"
+        },
+        "ugEmitente": {
+          "type": "string"
+        },
+        "gestaoEmitente": {
+          "type": "string"
+        },
+        "nomeUGEmitente": {
+          "type": "string"
+        },
+        "valorTotalLista": {
+          "type": "string"
+        },
+        "qtdItensLista": {
+          "type": "string"
+        },
+        "listaItens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListaItens"
+          }
+        }
+      }
+    },
     "ItensCredor": {
       "properties": {
         "tipoCredor": {
-          "type": "number"
+          "type": "string"
         },
         "favorecido": {
           "type": "string"
         },
         "bancoOrigem": {
-          "type": "number"
+          "type": "string"
         },
         "agenciaOrigem": {
-          "type": "number"
+          "type": "string"
         },
         "contaCorrenteOrigem": {
           "type": "string"
         },
         "valorCredito": {
-          "type": "number"
+          "type": "string"
+        }
+      }
+    },
+    "ListaItens": {
+      "properties": {
+        "sequencial": {
+          "type": "string"
+        },
+        "favorecido": {
+          "type": "string"
+        },
+        "bancoOrigem": {
+          "type": "string"
+        },
+        "agenciaOrigem": {
+          "type": "string"
+        },
+        "contaCorrenteOrigem": {
+          "type": "string"
+        },
+        "valorCredito": {
+          "type": "string"
+        },
+        "situacao": {
+          "type": "string"
         }
       }
     },
