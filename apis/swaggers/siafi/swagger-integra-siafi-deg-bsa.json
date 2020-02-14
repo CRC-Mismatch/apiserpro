@@ -1382,7 +1382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna os dados da Nota de Empenho Gerada",
+            "description": "Retorna os dados da Lista de Credores Gerada",
             "schema": {
               "$ref": "#/definitions/RetornoGeracaoListaCredores"
             }
