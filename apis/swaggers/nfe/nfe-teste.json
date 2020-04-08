@@ -857,7 +857,7 @@
                         "ICMSTot": {
                           "type": "object",
                           "properties": {
-                            "vCONFINS": {
+                            "vCOFINS": {
                               "type": "number",
                               "example": 0
                             },
@@ -873,7 +873,7 @@
                               "type": "number",
                               "example": 265.79
                             },
-                            "vSeq": {
+                            "vSeg": {
                               "type": "number",
                               "example": 0
                             },
@@ -917,7 +917,7 @@
                               "type": "number",
                               "example": 0
                             },
-                            "vDESC": {
+                            "vDesc": {
                               "type": "number",
                               "example": 0
                             },
@@ -1228,7 +1228,7 @@
                         "transporta": {
                           "type": "object",
                           "properties": {
-                            "xNone": {
+                            "xNome": {
                               "type": "string",
                               "example": "John Doe da Silva"
                             },
@@ -1265,7 +1265,7 @@
             }
           }
         },
-        "procEventosNFe": {
+        "procEventoNFe": {
           "type": "array",
           "items": {
             "properties": {
@@ -1276,7 +1276,7 @@
                     "type": "object",
                     "properties": {
                       "cOrgao": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 91
                       },
                       "dhEvento": {
@@ -1293,7 +1293,7 @@
                         }
                       },
                       "tpEvento": {
-                        "type": "string",
+                        "type": "integer",
                         "example": 610554
                       }
                     }
@@ -1307,11 +1307,11 @@
                     "type": "object",
                     "properties": {
                       "cOrgao": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 91
                       },
                       "nProt": {
-                        "type": "number",
+                        "type": "integer",
                         "example": 891193694384618
                       },
                       "dhRegEvento": {
@@ -1319,7 +1319,7 @@
                         "example": "2019-12-19T19:50:06-03:00" 
                       },
                       "tpEvento": {
-                        "type": "string",
+                        "type": "integer",
                         "example": 610554
                       }
                     }
